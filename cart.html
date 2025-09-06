@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カート - モダンショップ</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .cart-page {
+            min-height: 100vh;
+            padding-top: 80px;
+            background-color: var(--bg-light);
+        }
+        
+        .cart-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .cart-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .cart-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .cart-subtitle {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .cart-empty-icon {
+            font-size: 64px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .cart-empty-text {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        
+        .cart-items {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .cart-item-checkbox {
+            margin-right: 15px;
+        }
+        
+        .cart-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+            margin-right: 15px;
+        }
+        
+        .cart-item-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-description {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        
+        .cart-item-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        .cart-item-link {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .cart-item-link:hover {
+            background: var(--primary-dark);
+        }
+        
+        .cart-item-remove {
+            padding: 8px 12px;
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .cart-item-remove:hover {
+            background: #fee;
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        
+        .cart-actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-back {
+            padding: 12px 24px;
+            background: var(--bg-white);
+            color: var(--text-dark);
+            text-decoration: none;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .btn-back:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-clear {
+            padding: 12px 24px;
+            background: transparent;
+            color: #ef4444;
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-clear:hover {
+            background: #ef4444;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .cart-item-top {
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .cart-item-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>モダンショップ</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">ホーム</a>
+                    <a href="index.html#products" class="nav-link">商品</a>
+                    <a href="#about" class="nav-link">会社概要</a>
+                    <a href="#contact" class="nav-link">お問い合わせ</a>
+                </div>
+                <div class="nav-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-shopping-cart"></i>
+                    <div class="menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="cart-page">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h1 class="cart-title">カート</h1>
+                <p class="cart-subtitle">気になる商品をチェックして外部サイトで詳細をご確認ください</p>
+            </div>
+
+            <div id="cart-content">
+                <!-- Cart items will be loaded here -->
+            </div>
+
+            <div class="cart-actions" id="cart-actions" style="display: none;">
+                <a href="index.html" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> 商品一覧に戻る
+                </a>
+                <button class="btn-clear" onclick="clearCart()">
+                    <i class="fas fa-trash"></i> カートを空にする
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>モダンショップ</h3>
+                    <p>最高品質の商品を、最高のサービスでお届けします。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>サービス</h4>
+                    <ul>
+                        <li><a href="#">配送について</a></li>
+                        <li><a href="#">返品・交換</a></li>
+                        <li><a href="#">サイズガイド</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>会社情報</h4>
+                    <ul>
+                        <li><a href="#">会社概要</a></li>
+                        <li><a href="#">採用情報</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">利用規約</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>お問い合わせ</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> 0120-123-456</p>
+                        <p><i class="fas fa-envelope"></i> info@modernshop.jp</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 東京都渋谷区</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 モダンショップ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Sample product data (duplicate for cart page)
+        const products = [
+            {
+                id: 1,
+                title: "ワイヤレスヘッドフォン",
+                description: "高音質なノイズキャンセリング機能付きワイヤレスヘッドフォン",
+                price: 15980,
+                originalPrice: 19800,
+                category: "electronics",
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop",
+                rating: 4.5,
+                reviews: 128,
+                badge: "人気",
+                model: "short_1.stl",
+                externalUrl: "https://example.com/headphones"
+            },
+            {
+                id: 2,
+                title: "スマートウォッチ",
+                description: "健康管理機能付きスマートウォッチ、GPS・心拍数測定対応",
+                price: 32800,
+                originalPrice: null,
+                category: "electronics",
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop",
+                rating: 4.7,
+                reviews: 256,
+                badge: "新商品",
+                model: "short_4.stl",
+                externalUrl: "https://example.com/smartwatch"
+            },
+            {
+                id: 3,
+                title: "レザージャケット",
+                description: "本革を使用したクラシックなデザインのレザージャケット",
+                price: 45000,
+                originalPrice: 55000,
+                category: "fashion",
+                image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=300&fit=crop",
+                rating: 4.3,
+                reviews: 89,
+                badge: "セール",
+                model: "short_1.stl",
+                externalUrl: "https://example.com/leather-jacket"
+            },
+            // Add more products as needed...
+        ];
+
+        // Cart page specific functions
+        function loadCartPage() {
+            const cart = Cart.getCart();
+            const cartContent = document.getElementById('cart-content');
+            const cartActions = document.getElementById('cart-actions');
+
+            if (cart.length === 0) {
+                cartContent.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="cart-empty-text">カートは空です</div>
+                        <a href="index.html" class="btn-back">商品を見る</a>
+                    </div>
+                `;
+                cartActions.style.display = 'none';
+            } else {
+                let cartHTML = '<div class="cart-items">';
+                
+                cart.forEach(cartItem => {
+                    const product = products.find(p => p.id === cartItem.productId);
+                    if (product) {
+                        cartHTML += `
+                            <div class="cart-item">
+                                <div class="cart-item-checkbox">
+                                    <input type="checkbox" 
+                                           class="cart-checkbox" 
+                                           id="check-${product.id}"
+                                           ${cartItem.checked ? 'checked' : ''}
+                                           onchange="toggleCartItemCheck(${product.id})">
+                                </div>
+                                <div class="cart-item-image">
+                                    <img src="${product.image}" alt="${product.title}" loading="lazy">
+                                </div>
+                                <div class="cart-item-details">
+                                    <h3 class="cart-item-title">${product.title}</h3>
+                                    <p class="cart-item-description">${product.description}</p>
+                                    <div class="cart-item-price">¥${product.price.toLocaleString()}</div>
+                                </div>
+                                <div class="cart-item-actions">
+                                    <a href="${product.externalUrl || '#'}" 
+                                       class="cart-item-link" 
+                                       target="_blank"
+                                       onclick="handleExternalLink(${product.id})">
+                                        詳細を見る <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <button class="cart-item-remove" onclick="removeFromCart(${product.id})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                cartHTML += '</div>';
+                cartContent.innerHTML = cartHTML;
+                cartActions.style.display = 'flex';
+            }
+        }
+
+        function toggleCartItemCheck(productId) {
+            Cart.toggleChecked(productId);
+        }
+
+        function handleExternalLink(productId) {
+            // Auto-check when external link is clicked
+            const checkbox = document.getElementById(`check-${productId}`);
+            if (checkbox && !checkbox.checked) {
+                checkbox.checked = true;
+                Cart.toggleChecked(productId);
+            }
+        }
+
+        function removeFromCart(productId) {
+            Cart.removeItem(productId);
+            loadCartPage();
+            
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                showNotification(`${product.title}をカートから削除しました。`);
+            }
+        }
+
+        function clearCart() {
+            if (confirm('カートを空にしてもよろしいですか？')) {
+                localStorage.removeItem('cart');
+                Cart.updateCartIcon();
+                loadCartPage();
+                showNotification('カートを空にしました。');
+            }
+        }
+
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCartPage();
+            Cart.updateCartIcon();
+        });
+    </script>
+</body>
+</html>
