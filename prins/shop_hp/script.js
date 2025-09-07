@@ -176,7 +176,7 @@ const products = [
         id: 7,
         title: "トイレットペーパーフォルダー　キッチンフェンス対応版",
         description: "キッチンフェンスに引っ掛ける事が出来るようにするアタッチメント",
-        price: 100,
+        price: 0,
         originalPrice: null,
         category: "キッチンフェンス",
         image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
@@ -192,14 +192,28 @@ const products = [
         description: "キッチンフェンスのガイド",
         price: 100,
         originalPrice: null,
-        category: "電子機器",
+        category: "キッチンフェンス",
         image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
         rating: 4.8,
         hearts: 342,
-        badge: "電子機器",
+        badge: "キッチンフェンス",
         model: "short_add.stl",
         externalUrl: "https://prinsdata.booth.pm/items/7369940"
     }
+    //     {
+    //     id: 9,
+    //     title: "ショート缶小皿深さ2倍",
+    //     description: "ショート缶に3段入れられます　0仕切り",
+    //     price: 100,
+    //     originalPrice: null,
+    //     category: "キッチンフェンス",
+    //     image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
+    //     rating: 4.8,
+    //     hearts: 342,
+    //     badge: "キッチンフェンス",
+    //     model: "short_add.stl",
+    //     externalUrl: "https://prinsdata.booth.pm/items/7369940"
+    // }
 ];
 
 // Global variables
