@@ -136,13 +136,69 @@ const products = [
         description: "ショート缶をキッチンフェンスに引っ掛ける事が出来るようにするアタッチメント",
         price: 100,
         originalPrice: null,
-        category: "home",
+        category: "ショート缶",
         image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
         rating: 4.8,
         hearts: 342,
         badge: "ショート缶",
         model: "short_add.stl",
-        externalUrl: "https://example.com/coffee-maker"
+        externalUrl: "https://prinsdata.booth.pm/items/7389154"
+    },
+        {
+        id: 5,
+        title: "usbc電源基板用box",
+        description: "usbc充電基板をセット出来る枠",
+        price: 100,
+        originalPrice: null,
+        category: "電子機器",
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
+        rating: 4.8,
+        hearts: 342,
+        badge: "電子機器",
+        model: "short_add.stl",
+        externalUrl: "https://prinsdata.booth.pm/items/7378367"
+    },
+        {
+        id: 6,
+        title: "白光半田リール　キッチンフェンス",
+        description: "キッチンフェンスに引っ掛ける事が出来るようにするアタッチメント",
+        price: 100,
+        originalPrice: null,
+        category: "電子機器",
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
+        rating: 4.8,
+        hearts: 342,
+        badge: "電子機器",
+        model: "short_add.stl",
+        externalUrl: "https://prinsdata.booth.pm/items/7370419"
+    },
+        {
+        id: 7,
+        title: "トイレットペーパーフォルダー　キッチンフェンス対応版",
+        description: "キッチンフェンスに引っ掛ける事が出来るようにするアタッチメント",
+        price: 100,
+        originalPrice: null,
+        category: "キッチンフェンス",
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
+        rating: 4.8,
+        hearts: 342,
+        badge: "キッチンフェンス",
+        model: "short_add.stl",
+        externalUrl: "https://prinsdata.booth.pm/items/7370383"
+    },
+        {
+        id: 8,
+        title: "キッチンフェンス34mm　ガイドデータ",
+        description: "キッチンフェンスのガイド",
+        price: 100,
+        originalPrice: null,
+        category: "電子機器",
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",
+        rating: 4.8,
+        hearts: 342,
+        badge: "電子機器",
+        model: "short_add.stl",
+        externalUrl: "https://prinsdata.booth.pm/items/7369940"
     }
 ];
 
